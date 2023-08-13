@@ -1,4 +1,6 @@
 # http://desktop-rqq242g:8111/
+import time
+
 import requests
 from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
@@ -16,10 +18,7 @@ adapter = HTTPAdapter(max_retries=retry_strategy)
 pool = requests.Session()
 pool.mount("http://", adapter)  # 创建了一个 Session 对象，并将适配器挂载到 http:// 前缀上
 
-file = open('data.txt', 'r')
-content = file.read()
-file.close()
-
+# 读取配置
 # 读取文件
 file = open('data.txt', 'r')
 content = file.read()
@@ -99,7 +98,7 @@ def getState():
     # url = 'http://localhost:8111/indicators'
     # # str = "power 1, hp"        # "power 1, hp": 发动机马力
     # power = getData(url, "power 1, hp")
-
+    time.sleep(num)
     return Vy, Hm, throttle, IAS
 
 # url = 'http://localhost:8111/state'

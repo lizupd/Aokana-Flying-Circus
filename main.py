@@ -8,6 +8,7 @@ import port8111             # 调用8111端口
 import Fighting             # 调用战斗中图像识别
 import Back                 # 返回界面识别
 import Map                  # 地图识别
+import datetime             # 获取时间
 
 # 鼠标单击事件
 def Click():
@@ -69,6 +70,9 @@ def moveR(m):
 #################################################################################
 #################################################################################
 
+up = hm.upH()
+vTime = hm.vtime()
+vSet = hm.IAS()
 flag = 0
 while True:
     x, y = GetWindow.returData()   # 调用模块获得窗口坐标
@@ -147,12 +151,14 @@ while True:
             print(f"节流阀：{throttle} 正在加力;")
             pushW()
             Vy, Hm, throttle, IAS = port8111.getState()
-            h1, h2, press = Map.foundMap()         # 地图识别
+            h1, h2, press = Map.foundMap()              # 地图识别
+            start_time = datetime.datetime.now()        # 获取当前时间
             num += 1
 
         while True:
             Vy, Hm, throttle, IAS = port8111.getState()
             print(f"空速：{IAS} 高度：{Hm} 爬升率：{Vy} 节流阀：{throttle}")
+            p = 0   # 干扰物循环判断
 
             if throttle == 0 and IAS < 100:    # 判断是否死亡
                 death = 1
@@ -190,7 +196,7 @@ while True:
                     moveDwon(m=0.01)
                     print("微调下降")
                     break
-                elif IAS > 900:
+                elif IAS > vSet:
                     print("保持高度")
 
                 # CCRP寻路区
@@ -222,6 +228,14 @@ while True:
                     flag = 4
                     keyboard.press('u')     # 空格猴子
                     while ccrpX is not None:
+                        timeNow = datetime.datetime.now()       # 获取当前时间
+                        time_diff = timeNow - start_time        # 计算时间差
+                        # 检查是否过了多少分钟
+                        if time_diff.total_seconds() > vTime and p == 0:
+                            keyboard.press('p')     # 抛洒热诱
+                            time.sleep(0.1)
+                            keyboard.release('p')
+                            p = 1
                         if (ccrpX - aimX) > 200:    # 点在右边远处
                             moveR(m=0.1)
                             time.sleep(1)
@@ -244,8 +258,8 @@ while True:
                     if ccrpX is None:
                         time.sleep(10)
                         keyboard.release('u')
-                        h1 = h1 + 3000
-                        h2 = h2 + 3000
+                        h1 = h1 + up
+                        h2 = h2 + up
                 else:
                     flag = 3
             elif Hm > h2 and Vy > 0:  # 开始下降

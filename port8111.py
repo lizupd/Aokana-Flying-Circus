@@ -2,6 +2,7 @@
 import requests
 from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
+import re
 
 retry_strategy = Retry(
     total=3,    # 最大重试次数（包括第一次请求）
@@ -14,6 +15,26 @@ retry_strategy.method_whitelist = ["GET"]
 adapter = HTTPAdapter(max_retries=retry_strategy)
 pool = requests.Session()
 pool.mount("http://", adapter)  # 创建了一个 Session 对象，并将适配器挂载到 http:// 前缀上
+
+file = open('data.txt', 'r')
+content = file.read()
+file.close()
+
+# 读取文件
+file = open('data.txt', 'r')
+content = file.read()
+file.close()
+
+# 使用正则表达式提取数值
+pattern = r'get=(\d+)'
+match = re.search(pattern, content)
+if match:
+    value = match.group(1)
+    num = int(value)
+    print(num)
+else:
+    num = 0
+    print("get等待时间重置为默认值")
 
 def getData(url, *args):
     response = pool.get(url)

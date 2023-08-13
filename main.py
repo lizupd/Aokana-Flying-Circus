@@ -147,7 +147,7 @@ while True:
             print(f"节流阀：{throttle} 正在加力;")
             pushW()
             Vy, Hm, throttle, IAS = port8111.getState()
-            h1, h2, press= Map.foundMap()         # 地图识别
+            h1, h2, press = Map.foundMap()         # 地图识别
             num += 1
 
         while True:

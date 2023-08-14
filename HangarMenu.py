@@ -79,7 +79,7 @@ def IAS():
     if match:
         value = match.group(1)
         speed = int(value)
-        print(f"空速设置为{speed}")
+        print(f"空速设置为超过{speed}")
         return speed
     else:
         speed = 900

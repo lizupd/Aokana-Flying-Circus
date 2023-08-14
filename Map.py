@@ -19,26 +19,21 @@ def MD5():
         print("获取地图失败")
 
 # 获取地图数据
-def mapData(map):
+def mapData(map_name):
     # 打开文件
-    with open('Map.txt', 'r') as file:
+    with open('Map.txt', 'r', encoding='utf-8') as file:            # 打开文件并指定编码方式为UTF-8
         # 逐行读取文件内容
         for line in file:
-            # 去除行尾的换行符
-            line = line.strip()
-            # 查找目标行
-            if line.startswith(map):
-                # 提取数据部分
-                data = line.split(':')[1]
-                # 分割数据字符串
-                data_parts = data.split(',')
-                # 提取各个字段的值
-                h1 = int(data_parts[0].split('=')[1])
-                h2 = int(data_parts[1].split('=')[1])
-                v1 = int(data_parts[2].split('=')[1])
-                v2 = int(data_parts[3].split('=')[1])
-                v3 = int(data_parts[4].split('=')[1])
+            if map_name in line:
+                data = line.split(':')[1].strip()                   # 提取冒号后面的数据部分并去除首尾空格
+                values = data.split(',')                            # 将数据部分按逗号分割成不同的部分
+                h1 = int(values[0].split('=')[1])
+                h2 = int(values[1].split('=')[1])
+                v1 = int(values[2].split('=')[1])
+                v2 = int(values[3].split('=')[1])
+                v3 = int(values[4].split('=')[1])
                 return h1, h2, v1, v2, v3
+        return None
 
 def foundMap():
     h1 = 1000
@@ -57,38 +52,32 @@ def foundMap():
     if md5 == Vietnam:
         print("地图 越南")
         press = 1
-        map = 'Vietnam'
-        h1, h2, v1, v2, v3 = mapData(map)
+        h1, h2, v1, v2, v3 = mapData('Vietnam')
         return h1, h2, v1, v2, v3, press
     elif md5 == SinaiPeninsula:
         print("地图 西奈半岛")
         press = 1
-        map = 'SinaiPeninsula'
-        h1, h2, v1, v2, v3 = mapData(map)
+        h1, h2, v1, v2, v3 = mapData('SinaiPeninsula')
         return h1, h2, v1, v2, v3, press
     elif md5 == GolanHeights:
         print("地图 戈兰高地")
         press = 1
-        map = 'GolanHeights'
-        h1, h2, v1, v2, v3 = mapData(map)
+        h1, h2, v1, v2, v3 = mapData('GolanHeights')
         return h1, h2, v1, v2, v3, press
     elif md5 == Spain:
         print("地图 西班牙")
         press = 2
-        map = 'Spain'
-        h1, h2, v1, v2, v3 = mapData(map)
+        h1, h2, v1, v2, v3 = mapData('Spain')
         return h1, h2, v1, v2, v3, press
     elif md5 == PyreneesMountains:
         print("地图 比利牛斯山脉")
         press = 1
-        map = 'PyreneesMountains'
-        h1, h2, v1, v2, v3 = mapData(map)
+        h1, h2, v1, v2, v3 = mapData('PyreneesMountains')
         return h1, h2, v1, v2, v3, press
     elif md5 == BigCity:
         print("地图 大都会")
         press = 2
-        map = 'BigCity'
-        h1, h2, v1, v2, v3 = mapData(map)
+        h1, h2, v1, v2, v3 = mapData('BigCity')
         return h1, h2, v1, v2, v3, press
     else:
         return h1, h2, v1, v2, v3, press

@@ -44,7 +44,7 @@ A:信息差被骗钱很正常，例如AI绘画包天天都有人买。
 如果你不喜欢看到无良商家赚这种钱，那么你可以为我的项目点一颗星星，并且为我的b站视频一键三连来宣传这个项目，让更多的人知道这个免费开源脚本（笑）  
 T:It is not uncommon for misinformation to lead to financial deception, as seen in cases where AI painting packages are frequently sold.  
 If you disapprove of unscrupulous merchants profiting from such practices, you have the option to support my project by giving it a favorable rating and promoting it through engaging with my Bilibili video, thereby increasing awareness of this free and open-source script. A simple action that could make a substantial difference (laughs).  
-[Bilibili视频](https://www.bilibili.com/video/BV1v44y1c7ei/?vd_source=0dc7a1e616307a9f5fb9d8ed396f1e81)
+[Bilibili视频](https://www.bilibili.com/video/BV1Fj411B7Kf)
 
 Q:这个项目还存在哪些问题，没有实现哪些功能？  
 A:好多好多，我只能实现简单的一架飞机反复挂机，以及自动研发。并且我还在测试，不清楚有哪些BUG。  

@@ -152,7 +152,8 @@ while True:
             pushW()
             Vy, Hm, throttle, IAS = port8111.getState()
             h1, h2, v1, v2, v3, press = Map.foundMap()              # 地图识别
-            start_time = datetime.datetime.now()        # 获取当前时间
+            print(f"飞行高度区间: {h1}m - {h2}m, v1: {v1}, v2: {v2}, v3: {v3}")
+            start_time = datetime.datetime.now()                    # 获取当前时间
             num += 1
 
         while True:

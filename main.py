@@ -151,7 +151,7 @@ while True:
             print(f"节流阀：{throttle} 正在加力;")
             pushW()
             Vy, Hm, throttle, IAS = port8111.getState()
-            h1, h2, press = Map.foundMap()              # 地图识别
+            h1, h2, v1, v2, v3, press = Map.foundMap()              # 地图识别
             start_time = datetime.datetime.now()        # 获取当前时间
             num += 1
 
@@ -169,15 +169,15 @@ while True:
                 print(f"空速：{IAS} 无法起飞")
                 break
             elif Hm < h1:      # 判断水平高度
-                if Vy < 5:      # 判断爬升率
+                if Vy < v1:      # 判断爬升率
                     moveUp(m=0.05)
                     print("开始爬升")
                     break
-                elif 15 > Vy > 5:
+                elif v2 > Vy > v1:
                     moveUp(m=0.01)
                     print("起飞微调")
                     break
-                elif Vy > 20:
+                elif Vy > v3:
                     moveDwon(m=0.05)
                     print("起飞微调")
                     break
